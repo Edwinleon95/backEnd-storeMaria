@@ -35,7 +35,6 @@ module.exports = (sequelize) => {
       },
       telefonosCelulares: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
       },
       estado: {
         type: DataTypes.BOOLEAN,
