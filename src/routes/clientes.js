@@ -10,9 +10,9 @@ const {
 } = require("../controllers/usuarios.controllers");
 
 //rutas cliente
-router.get("/", obtenerUsuarios);
+router.get("/:status", obtenerUsuarios);
 router.post("/", crearUsuario);
-router.put("/", editarUsuario);
-router.delete("/", eliminarUsuario);
+router.put("/:id", editarUsuario);
+router.delete("/:id", eliminarUsuario);
 
 module.exports = router;

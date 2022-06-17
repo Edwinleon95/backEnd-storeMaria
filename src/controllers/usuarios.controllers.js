@@ -1,9 +1,9 @@
 const { Cliente } = require("../db");
 
 const obtenerUsuarios = async (req, res) => {
-  const { status } = req.query;
+  const { status } = req.params;
   try {
-    if (status != undefined) {
+    if (status !== undefined) {
       let clientes = await Cliente.findAll({ where: { estado: status } });
       res.json(clientes);
     } else {
@@ -25,7 +25,7 @@ const crearUsuario = async (req, res) => {
     correoElectronico,
     telefonosCelulares,
     empresa,
-    nit
+    nit,
   } = req.body;
 
   try {
@@ -38,7 +38,7 @@ const crearUsuario = async (req, res) => {
       correoElectronico,
       telefonosCelulares,
       empresa,
-      nit
+      nit,
     });
     res.json(nuevoCliente);
   } catch (err) {
@@ -55,9 +55,11 @@ const editarUsuario = async (req, res) => {
     fechaDeNacimiento,
     correoElectronico,
     telefonosCelulares,
+    empresa,
+    nit,
   } = req.body;
 
-  const { id } = req.query;
+  const { id } = req.params;
 
   try {
     await Cliente.update(
@@ -69,6 +71,8 @@ const editarUsuario = async (req, res) => {
         fechaDeNacimiento,
         correoElectronico,
         telefonosCelulares,
+        empresa,
+        nit
       },
       { where: { id: id } }
     );
@@ -79,7 +83,7 @@ const editarUsuario = async (req, res) => {
 };
 
 const eliminarUsuario = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   try {
     const { estado } = await Cliente.findOne({ where: { id: id } });
     if (estado) {
