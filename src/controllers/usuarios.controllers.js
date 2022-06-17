@@ -2,7 +2,6 @@ const { Cliente } = require("../db");
 
 const obtenerUsuarios = async (req, res) => {
   const { status } = req.query;
-  console.log(status);
   try {
     if (status != undefined) {
       let clientes = await Cliente.findAll({ where: { estado: status } });
@@ -25,6 +24,8 @@ const crearUsuario = async (req, res) => {
     fechaDeNacimiento,
     correoElectronico,
     telefonosCelulares,
+    empresa,
+    nit
   } = req.body;
 
   try {
@@ -36,6 +37,8 @@ const crearUsuario = async (req, res) => {
       fechaDeNacimiento,
       correoElectronico,
       telefonosCelulares,
+      empresa,
+      nit
     });
     res.json(nuevoCliente);
   } catch (err) {

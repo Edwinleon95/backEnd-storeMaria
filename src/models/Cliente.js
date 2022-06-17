@@ -36,6 +36,12 @@ module.exports = (sequelize) => {
       telefonosCelulares: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
+      nit: {
+        type: DataTypes.STRING,
+      },
+      empresa: {
+        type: DataTypes.STRING,
+      },
       estado: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
