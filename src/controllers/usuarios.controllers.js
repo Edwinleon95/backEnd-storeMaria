@@ -3,12 +3,24 @@ const { Cliente } = require("../db");
 const obtenerUsuarios = async (req, res) => {
   const { status } = req.params;
   try {
-    if (status !== undefined) {
+    if (status == "true") {
       let clientes = await Cliente.findAll({ where: { estado: status } });
-      res.json(clientes);
+      return res.json(clientes);
+    }
+    if (status == "false") {
+      let clientes = await Cliente.findAll({ where: { estado: status } });
+      return res.json(clientes);
+    }
+    if (
+      status.match(
+        /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+      )
+    ) {
+      let cliente = await Cliente.findAll({ where: { id: status } });
+      return res.json(cliente);
     } else {
       let clientes = await Cliente.findAll();
-      res.json(clientes);
+      return res.json(clientes);
     }
   } catch (err) {
     console.error(err);
@@ -72,7 +84,7 @@ const editarUsuario = async (req, res) => {
         correoElectronico,
         telefonosCelulares,
         empresa,
-        nit
+        nit,
       },
       { where: { id: id } }
     );
